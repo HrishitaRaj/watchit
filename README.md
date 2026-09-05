@@ -271,9 +271,7 @@ Dashboard: http://localhost:3000 - API docs: http://localhost:8000/docs
 
 ---
 
-## Deployment
 
-See **[DEPLOY.md](./DEPLOY.md)** for step-by-step on Render, Railway, or a self-hosted VPS.
 
 TL;DR: Backend on Render Web Service (Python, free tier) + Frontend on Render Static Site + MongoDB Atlas M0 cluster + Resend (100 emails/day free).
 
