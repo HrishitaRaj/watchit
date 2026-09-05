@@ -1,0 +1,71 @@
+/* WATCHIT! — Add-Stock preview, watchlist picker, alerts section
+   Loaded after App.css and watchlist.css so it can layer safely. */
+
+/* Global overflow safeguards (belt & braces with index.css) */
+.app-shell{max-width:100%;overflow-x:hidden}
+.main{overflow-x:hidden}
+
+/* Top-bar watchlist picker */
+.watchlist-picker{
+  background:var(--surface);color:var(--text);
+  border:1px solid var(--border);border-radius:7px;
+  padding:9px 12px;font-size:12px;font-weight:600;
+  min-width:160px;max-width:220px;
+  cursor:pointer;outline:0;
+  appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;
+  background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+  padding-right:32px;
+}
+.watchlist-picker:hover{border-color:var(--green)}
+.watchlist-picker:focus{border-color:var(--green)}
+
+/* Preview card in add-stock drawer */
+.preview-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:12px 14px;margin-bottom:16px;
+  display:grid;gap:6px;
+}
+.preview-card.err{border-color:#4a2028;background:#231218}
+.preview-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.preview-head strong{font:600 14px 'JetBrains Mono';letter-spacing:.02em}
+.preview-head span{font-size:13px;font-weight:600}
+
+/* Alerts section (Settings) */
+.alerts-section{margin-top:16px;max-width:850px}
+.alert-form{
+  display:grid;grid-template-columns:minmax(0,1fr) 110px minmax(0,1.4fr) auto;
+  gap:10px;align-items:stretch;margin:18px 0 20px;
+}
+.alert-form input{
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  padding:11px 13px;border-radius:7px;outline:0;min-width:0;font-size:13px;
+}
+.alert-form input:focus{border-color:var(--green)}
+.alert-form button{white-space:nowrap}
+.alert-list{border-top:1px solid var(--border)}
+.alert-row{
+  display:grid;grid-template-columns:32px minmax(0,1fr) auto auto;
+  gap:14px;align-items:center;
+  padding:16px 4px;border-bottom:1px solid var(--border);
+}
+.alert-icon{color:var(--green);display:grid;place-items:center;
+  background:#07382e;border-radius:50%;width:32px;height:32px}
+.alert-body strong{font-size:13px;display:block}
+.alert-body small{color:var(--muted);font-size:11px;display:block;margin-top:4px}
+
+/* Fine-tune market strip on ultra-narrow to avoid clipping */
+@media(max-width:640px){
+  .market-strip{padding:14px}
+  .market-strip .stat{min-width:0}
+  .market-strip .strip-meta{margin-left:0;width:100%;order:3}
+  .strip-chart{display:none}
+  .top-actions{gap:10px}
+  .watchlist-picker{max-width:150px;font-size:11px}
+  .alert-form{grid-template-columns:1fr 1fr;grid-auto-rows:auto}
+  .alert-form input[type="email"]{grid-column:1/-1}
+  .alert-form button{grid-column:1/-1}
+  .alert-row{grid-template-columns:28px minmax(0,1fr);gap:10px}
+  .alert-row button{grid-column:2}
+}

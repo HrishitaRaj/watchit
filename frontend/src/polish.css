@@ -1,0 +1,114 @@
+/* WATCHIT! v4 polish — market pulse, snapshot comparison card,
+   compare page, primary tag, top gainers/losers styles. */
+
+/* Market pulse (Overview) */
+.market-pulse{margin:0 0 56px}
+.pulse-head{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:16px;font-size:13px;color:var(--muted);
+}
+.pulse-head strong{color:var(--text);font-weight:600;font-size:14px}
+.pulse-head .muted{margin-left:auto;font-size:12px}
+.pulse-grid{
+  display:grid;gap:14px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+}
+.pulse-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;
+  transition:border-color .2s, transform .2s;
+}
+.pulse-card:hover{border-color:#2f3d54;transform:translateY(-2px)}
+.pulse-card.up-bg{border-top:2px solid var(--green)}
+.pulse-card.down-bg{border-top:2px solid var(--red)}
+.pulse-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.pulse-top .muted{font-size:11px;letter-spacing:.08em;font-weight:600;text-transform:uppercase}
+.pulse-top strong{font-size:13px;font-family:'JetBrains Mono';font-weight:600}
+.pulse-value{
+  font:600 22px 'JetBrains Mono';color:var(--text);margin:8px 0 6px;
+  letter-spacing:-.01em;
+}
+.pulse-card .sparkline{height:34px;opacity:.85}
+
+/* Snapshot comparison card (Stock detail) */
+.snapshot-card{
+  background:linear-gradient(145deg,#162229,#101720);
+  border:1px solid #24333d;border-radius:12px;
+  padding:22px 26px;margin:8px 0 32px;
+}
+.snapshot-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;
+}
+.snapshot-grid{
+  display:grid;grid-template-columns:1fr 40px 1fr 1fr;gap:20px;align-items:end;
+}
+.snapshot-grid strong{
+  display:block;font:600 22px 'JetBrains Mono';margin:6px 0 2px;color:var(--text);
+}
+.snapshot-grid small{font-size:11px;display:block}
+.snap-arrow{
+  display:grid;place-items:center;color:var(--green);
+  background:#08312b;border-radius:50%;width:38px;height:38px;
+}
+.snap-delta strong{font-size:20px}
+
+/* Compare page */
+.compare-pickers{
+  display:flex;align-items:center;gap:14px;margin-bottom:32px;flex-wrap:wrap;
+}
+.compare-pickers select{
+  background:var(--surface);color:var(--text);
+  border:1px solid var(--border);border-radius:8px;
+  padding:11px 14px;font-size:13px;min-width:200px;font-weight:600;
+  cursor:pointer;outline:0;
+}
+.compare-pickers select:focus{border-color:var(--green)}
+.compare-grid{
+  display:grid;gap:28px;
+  grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+}
+.compare-side{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:24px;
+}
+.compare-side .stats-grid{margin:16px 0 20px}
+.compare-side .stock-list{margin-top:16px;border-top:1px solid var(--border)}
+.compare-head h2{font:600 20px Outfit;margin:6px 0 4px}
+.compare-sector-list{
+  display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px;
+}
+.compare-sector{
+  background:rgba(0,208,156,.08);color:var(--green);
+  padding:6px 10px;border-radius:20px;font-size:11px;font-weight:600;
+  display:flex;gap:6px;align-items:center;
+}
+.compare-sector strong{color:var(--text);font-family:'JetBrains Mono'}
+
+/* Primary tag on watchlist header */
+.primary-tag{
+  background:rgba(0,208,156,.14);color:var(--green);
+  padding:2px 8px;border-radius:4px;font-size:9px;letter-spacing:.14em;
+  margin-left:8px;font-weight:700;vertical-align:middle;
+}
+
+/* Stale badge (used in stock rows) */
+.stale-badge{
+  display:block;background:rgba(255,91,91,.14);color:var(--red);
+  padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700;
+  letter-spacing:.1em;margin-top:4px;width:fit-content;margin-left:auto;
+}
+
+/* Insights top gainers/losers section */
+.section-block .green{color:var(--green)}
+
+/* Mobile responsiveness */
+@media(max-width:640px){
+  .snapshot-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .snap-arrow{grid-column:1 / -1;justify-self:center;margin:0}
+  .snap-delta{grid-column:1 / -1}
+  .compare-pickers select{width:100%;min-width:0}
+  .compare-pickers .muted{width:100%;text-align:center}
+  .compare-grid{grid-template-columns:1fr}
+  .pulse-value{font-size:20px}
+}

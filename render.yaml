@@ -1,0 +1,57 @@
+# Render.com Blueprint
+# Deploy both backend and frontend with one YAML file
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ── Backend API ─────────────────────────────────────────────
+  - type: web
+    name: watchit-api
+    env: python
+    region: singapore          # closest to Indian market data
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: MONGO_URL
+        sync: false            # set in Render dashboard
+      - key: DB_NAME
+        value: watchit_prod
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: "https://watchit-frontend.onrender.com"
+      - key: QUOTE_CACHE_TTL_SECONDS
+        value: "30"
+      - key: RESEND_API_KEY
+        sync: false
+      - key: SENDER_EMAIL
+        value: "onboarding@resend.dev"
+      - key: ALERT_COOLDOWN_HOURS
+        value: "6"
+      - key: DIGEST_TIMEZONE
+        value: "Asia/Kolkata"
+      - key: DIGEST_HOUR_LOCAL
+        value: "8"
+
+  # ── Frontend ────────────────────────────────────────────────
+  - type: web
+    name: watchit-frontend
+    env: static
+    region: singapore
+    plan: free
+    rootDir: frontend
+    buildCommand: yarn install && yarn build
+    staticPublishPath: build
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        fromService:
+          type: web
+          name: watchit-api
+          envVarKey: RENDER_EXTERNAL_URL
+        value: https://watchit-api.onrender.com
