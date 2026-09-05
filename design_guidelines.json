@@ -1,0 +1,68 @@
+{
+  "project_name": "WATCHIT!",
+  "tagline": "Markets move. WATCHIT! tells you what matters.",
+  "app_type": "hybrid_fullstack",
+  "theme": "dark",
+  "typography": {
+    "heading_font": "Outfit",
+    "body_font": "Plus Jakarta Sans",
+    "mono_font": "JetBrains Mono",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight font-extrabold text-white",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-bold text-white",
+      "h3": "text-xl sm:text-2xl font-semibold text-white",
+      "h4": "text-lg sm:text-xl font-medium text-white",
+      "body": "text-sm sm:text-base text-zinc-300 leading-relaxed",
+      "small": "text-xs text-zinc-400 font-medium"
+    }
+  },
+  "colors": {
+    "background": "#0B0F17",
+    "surface": "#131822",
+    "surface_hover": "#1A2230",
+    "border": "#222C3D",
+    "primary": "#00D09C",
+    "primary_hover": "#02B889",
+    "secondary": "#3B82F6",
+    "accent_green": "#00D09C",
+    "accent_red": "#FF5B5B",
+    "text_main": "#F8FAFC",
+    "text_muted": "#94A3B8"
+  },
+  "visual_enhancers": {
+    "glassmorphism": "backdrop-blur-xl bg-[#131822]/80 border border-[#222C3D]",
+    "card_style": "bg-[#131822] border border-[#222C3D] rounded-xl p-6 shadow-sm transition-all duration-200 hover:border-[#00D09C]/40",
+    "glow_effect": "shadow-[0_0_30px_rgba(0,208,156,0.15)]",
+    "badge_attention": "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#00D09C]/10 text-[#00D09C] border border-[#00D09C]/20"
+  },
+  "component_path": "/app/frontend/src/components/",
+  "image_urls": [
+    {
+      "category": "market_charts",
+      "description": "Minimal dark mode stock market candlestick chart",
+      "url": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MjJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGNoYXJ0cyUyMG1pbmltYWwlMjBkYXJrJTIwbW9kZXxlbnwwfHx8fDE3ODg1MTQ0MjZ8MA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      "category": "trading_screen",
+      "description": "Screen showing crypto or stock trading chart",
+      "url": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MjJ8MHwxfHNlYXJjaHwyfHxzdG9jayUyMG1hcmtldCUyMGNoYXJ0cyUyMG1pbmltYWwlMjBkYXJrJTIwbW9kZXxlbnwwfHx8fDE3ODg1MTQ0MjZ8MA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      "category": "candlestick",
+      "description": "Candlestick stock chart on dark screen",
+      "url": "https://images.unsplash.com/photo-1689732888407-310424e3a372?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MjJ8MHwxfHNlYXJjaHwzfHxzdG9jayUyMG1hcmtldCUyMGNoYXJ0cyUyMG1pbmltYWwlMjBkYXJrJTIwbW9kZXxlbnwwfHx8fDE3ODg1MTQ0MjZ8MA&ixlib=rb-4.1.0&q=85"
+    }
+  ],
+  "instructions_to_main_agent": [
+    "Ensure all interactive elements have data-testid attributes.",
+    "Use Outfit for headers, Plus Jakarta Sans for body, and JetBrains Mono for numbers/tickers.",
+    "Implement the 'Since Your Last Visit' intelligence engine prominently on the dashboard.",
+    "Ensure responsive layout for mobile and desktop viewports.",
+    "Use sonner for toasts and shadcn primitives for modals, dropdowns, and tabs."
+  ],
+  "universal_guidelines": [
+    "Never use pure black; use #0B0F17 as base and #131822 for cards.",
+    "Ensure high contrast accessibility on all text elements.",
+    "Add generous spacing (p-6 to p-8) on cards and containers."
+  ]
+}

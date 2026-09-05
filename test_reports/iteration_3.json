@@ -1,0 +1,36 @@
+{
+  "summary": "Iteration 3 backend + frontend regression. 17/17 pytest tests pass (7 new iter3 tests: dashboard summary non-empty, watchlist_id switch, /stocks/preview curated+PAYTM+bogus, alerts CRUD, alert trigger via dashboard evaluate). Playwright end-to-end validated: register/login, non-empty ai-summary-text, watchlist-picker rendered, horizontal scroll clean at 320/375/768/1024/1440, add-stock preview-card (PAYTM shows One97 name+sector+price, BOGUSNONE shows error, Add button disabled without valid preview), seamless add/remove of WIPRO without a full page reload, second watchlist creation auto-switches active watchlist (eyebrow updates to SECOND_XXXXX), AlertsSection full CRUD (empty state → create → pause/resume toggle → delete → empty state), Settings AlertsSection UI renders correctly.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Watchlist picker <select>", "issues": ["Dev-tool wraps <option> children in <span> which produces a React hydration warning ('In HTML, <span> cannot be a child of <option>'). Purely cosmetic — the picker works — but appears as a red console error and breaks Playwright's select_option (had to work around). Consider avoiding text expressions inside <option> or suppressing dev-tool wrapping."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration3.py",
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/iter3.xml"
+  ],
+  "action_items": [
+    "OPTIONAL: address the dev-tool hydration warning around WatchlistPicker <option> children (React error surfaced in console; does not affect UX).",
+    "OPTIONAL (carry-over from iter_2): StockDetail on 503 now renders an inline error state via [data-testid=stock-detail-error] — verified present in App.js line 145; treat prior action item as resolved."
+  ],
+  "critical_code_review_comments": [
+    "server.py sector_detail still uses `matching and meta[matching[0]]['sector'] or name` after a 404 has been raised for empty `matching` — dead branch, can simplify.",
+    "alerts_module.evaluate is scheduled with asyncio.create_task(...) inside dashboard(); background failures are silently swallowed. Consider adding a done_callback to log exceptions so alert regressions don't go unnoticed.",
+    "mailer.send catches all exceptions; combined with cooldown logic that only bumps last_triggered_at *after* email attempts, a repeatedly-failing Resend call still counts as 'triggered' (blocks retry for COOLDOWN_HOURS). Acceptable per spec (last_email_error is captured), noted for awareness."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration3.py",
+    "/app/test_reports/iteration_3.json"
+  ],
+  "success_rate": {"backend": "100% (17/17)", "frontend": "100% of tested flows"},
+  "test_credentials": "Fresh users are registered on the fly (watchit.i3.<hex>@example.com / watchit123). No pre-provisioned account required. Resend recipient used: delivered@resend.dev.",
+  "seed_data_creation": "Ephemeral users created via /api/auth/register during pytest and Playwright runs. Watchlists auto-created. One temporary second watchlist per user (later deleted). One temporary alert on RELIANCE threshold=0 created and deleted per alert-trigger test.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All iteration 3 features are green end-to-end. New data-testids verified: watchlist-picker, preview-card, alerts-section, alerts-empty, alert-row-<id>, alert-symbol-input, alert-threshold-input, alert-email-input, alert-create-button, alert-toggle-<id>, alert-delete-<id>. Backend alert trigger loop (evaluate scheduled by /api/dashboard) fires within ~1-2s for threshold=0. Note: creating a new watchlist auto-switches the active watchlist (WatchlistProvider selects the newest), which is why the eyebrow updates immediately after Create. If future tests want to test the picker itself, avoid Playwright select_option because dev-tool injects <span> inside <option>; instead dispatch a native change event via page.evaluate.",
+  "rca of the issue": "N/A — no functional bugs reproduced this iteration."
+}
